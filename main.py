@@ -1,4 +1,5 @@
 import view
 import controller
 while True:
- controller.p()
+    controller.p()
+    view.flip()
