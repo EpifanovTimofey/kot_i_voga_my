@@ -8,3 +8,4 @@ while True:
     controller.p()
     view.flip()
     model.move_ob()
+    model.move_kaplya()

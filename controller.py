@@ -16,7 +16,9 @@ def p():
             model.move_r()
         if f.type == pygame.KEYDOWN and f.key == pygame.K_LEFT:
             model.move_l()
+        if f.type == pygame.KEYDOWN and f.key == pygame.K_SPACE:
+            model.move_voda()
         if f.type == a:
             model.o = random.randint(0, 1)
-
+            model.tp_kaplya()
     model.show_rects = bool(pygame.key.get_pressed()[pygame.K_TAB])
