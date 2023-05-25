@@ -7,9 +7,11 @@ a = pygame.event.custom_type()
 pygame.time.set_timer(a, 3000)
 b = pygame.event.custom_type()
 pygame.time.set_timer(b, 3000, 1)
+c = None
+
 
 def p():
-    global  b
+    global b, c
     p1 = pygame.event.get()
     for f in p1:
         if f.type == pygame.QUIT:
@@ -23,4 +25,8 @@ def p():
         if f.type == b:
             pygame.time.set_timer(b, model.speed_zader_kap, 1)
             model.tp_kaplya()
+        if f.type == model.c:
+            model.sun0()
+        if f.type == pygame.KEYDOWN and f.key == pygame.K_RETURN:
+            model.poyavlenie_sun()
     model.show_rects = bool(pygame.key.get_pressed()[pygame.K_TAB])

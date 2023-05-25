@@ -19,7 +19,8 @@ speed_ob = 3
 speed_kap = 3
 urov = 1
 speed_zader_kap = 3000
-
+sun = 0
+c = 0
 
 def move_r():
     global reverse
@@ -69,7 +70,7 @@ def move_kaplya():
         rect_kaplya.left = 900
         kapli1 += 1
     if rect_kaplya.colliderect(rect_voda):
-        move_voda()
+        move_voda(-8)
         rect_kaplya.left = 900
 
 
@@ -94,9 +95,42 @@ def tp_kaplya():
 
 
 
-def move_voda():
-    rect_voda.top -= 8
+def move_voda(r):
+    rect_voda.top += r
+    if rect_voda.top > 560:
+        rect_voda.top = 560
     rect_plot.top = rect_voda.top
     rect_cat.top = rect_plot.top - 100
     rect_zontik.top = rect_cat.top - 80
     rect_vedro.top = rect_cat.top - 35
+
+
+def sun1():
+    global sun
+    sun = 1
+
+def sun0():
+    global sun
+    sun = 0
+
+def slow():
+    global speed_kap, speed_ob, speed_zader_kap
+    speed_ob -= 1
+    speed_kap -= 1
+    speed_zader_kap += 250
+    if speed_ob < 3:
+        speed_ob = 3
+    if speed_kap < 3:
+        speed_kap = 3
+    if speed_zader_kap > 3000:
+        speed_zader_kap = 3000
+    move_voda(8)
+
+def poyavlenie_sun():
+    global c, kapli1
+    if sun == 0 and kapli1 >= 10:
+        kapli1 -= 10
+        sun1()
+        slow()
+        c = pygame.event.custom_type()
+        pygame.time.set_timer(c, 3000, 1)

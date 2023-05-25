@@ -27,7 +27,8 @@ text_shrift = pygame.font.SysFont("arial", 40)
 
 def flip():
     dis.fill([0, 0, 0])
-    dis.blit(sun1, model.rect_sun)
+    if model.sun == 1:
+        dis.blit(sun1, model.rect_sun)
     dis.blit(kaplya1, model.rect_kaplya)
     dis.blit(oblako1, model.rect_oblako)
     dis.blit(voda1, model.rect_voda)
