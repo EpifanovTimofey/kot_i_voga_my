@@ -1,7 +1,10 @@
 import random
+import time
 
 import pygame
 
+scena = "menu"
+rect_knopka = pygame.Rect([200, 250, 400, 100])
 rect_voda = pygame.Rect([0, 560, 800, 30])
 rect_plot = pygame.Rect([100, rect_voda.top, 210, 50])
 rect_cat = pygame.Rect([100, rect_plot.top - 100, 167, 126])
@@ -12,6 +15,7 @@ rect_kaplya = pygame.Rect([rect_oblako.left + 35, 55, 15, 20])
 rect_sun = pygame.Rect([670, 10, 120, 120])
 show_rects = False
 reverse = False
+b = pygame.event.custom_type()
 o = 1
 kapli1 = 0
 vsego_kapel = 5
@@ -21,6 +25,7 @@ urov = 1
 speed_zader_kap = 3000
 sun = 0
 c = 0
+
 
 def move_r():
     global reverse
@@ -61,6 +66,7 @@ def povorot_r1():
     rect_zontik.right = rect_cat.right - 95
     rect_plot.right = rect_cat.right
 
+
 def move_kaplya():
     global rect_kaplya, kapli1
     rect_kaplya.top += speed_kap
@@ -94,7 +100,6 @@ def tp_kaplya():
             speed_zader_kap = 500
 
 
-
 def move_voda(r):
     rect_voda.top += r
     if rect_voda.top > 560:
@@ -109,9 +114,11 @@ def sun1():
     global sun
     sun = 1
 
+
 def sun0():
     global sun
     sun = 0
+
 
 def slow():
     global speed_kap, speed_ob, speed_zader_kap
@@ -126,6 +133,7 @@ def slow():
         speed_zader_kap = 3000
     move_voda(8)
 
+
 def poyavlenie_sun():
     global c, kapli1
     if sun == 0 and kapli1 >= 10:
@@ -134,3 +142,21 @@ def poyavlenie_sun():
         slow()
         c = pygame.event.custom_type()
         pygame.time.set_timer(c, 3000, 1)
+
+
+def game():
+    global scena, b
+    scena = "play"
+    pygame.time.set_timer(b, speed_zader_kap, 1)
+    pygame.key.set_repeat(33)
+
+def game1():
+    global scena
+    scena = "menu"
+
+def game_pause():
+    global scena
+    scena = "pause"
+    pygame.key.set_repeat()
+    time.sleep(0.1)
+    pygame.event.clear()
