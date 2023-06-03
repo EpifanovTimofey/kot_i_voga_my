@@ -1,6 +1,6 @@
 import random
 import time
-
+import os
 import pygame
 
 scena = "menu"
@@ -25,6 +25,14 @@ urov = 1
 speed_zader_kap = 3000
 sun = 0
 c = 0
+
+if os.path.exists('text1.txt') == False:
+    fff = open("text1.txt", "w")
+    print(0, file=fff)
+    fff.close()
+fff = open("text1.txt", "r")
+resultat = int(fff.read())
+fff.close()
 
 
 def move_r():
@@ -76,7 +84,10 @@ def move_kaplya():
         rect_kaplya.left = 900
         kapli1 += 1
     if rect_kaplya.colliderect(rect_voda):
-        move_voda(-8)
+        # move_voda(-8)
+        move_voda(-200)
+        if rect_voda.top <= 275:
+            game1()
         rect_kaplya.left = 900
 
 
@@ -151,8 +162,22 @@ def game():
     pygame.key.set_repeat(33)
 
 def game1():
-    global scena
+    global scena, kapli1, vsego_kapel, speed_ob, speed_kap, speed_zader_kap, urov, sun, fff, resultat
     scena = "menu"
+    if urov > resultat:
+        resultat = urov
+        fff = open("text1.txt", "w")
+        print(resultat, file=fff)
+        fff.close()
+    kapli1 = 0
+    vsego_kapel = 5
+    speed_ob = 3
+    speed_kap = 3
+    urov = 1
+    speed_zader_kap = 3000
+    sun = 0
+    move_voda(560 - rect_voda.top)
+
 
 def game_pause():
     global scena
